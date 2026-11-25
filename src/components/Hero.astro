@@ -1,0 +1,57 @@
+---
+// #top: the house in section (concept §5 «Перший екран детально»). No photo: type, the roof line and colour fields.
+import Channels from "./Channels.astro";
+import Icon from "./Icon.astro";
+import { rooms, renovation } from "../data/site";
+const floors = [rooms.slice(0, 4), rooms.slice(4, 8)];
+---
+<section id="top" class="hero" data-rec="R-UX-01,R-UX-10,SE-R001,G-R006,MA-R005,MA-R006">
+  <div class="container hero__attic">
+    <svg class="roof" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path class="roof__path roof__path--wide" d="M0 100 L380 4 L560 31.9 L560 12 L604 12 L604 38.7 L1000 100" vector-effect="non-scaling-stroke" />
+      <path class="roof__path roof__path--narrow" d="M0 100 L300 4 L640 50.6 L640 24 L720 24 L720 61.6 L1000 100" vector-effect="non-scaling-stroke" />
+    </svg>
+    <h1 class="hero__title" data-rec="SE-R004">Майстри для всього дому у&nbsp;Львові</h1>
+    <div class="hero__aside">
+      <p class="hero__lead">Від змішувача до переїзду: менеджер підбере майстра, а&nbsp;гарантію ви отримаєте письмово, в&nbsp;Акті.</p>
+      <Channels variant="hero" rec="R-UX-03" />
+      <p class="hero__note">Майстер через годину після заявки або у&nbsp;зручний вам час.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="trust" aria-label="Чому нам довіряють">
+      <li>З 2002 року</li>
+      <li>Письмова гарантія і&nbsp;Акт</li>
+      <li>Оплата після приймання</li>
+    </ul>
+  </div>
+
+  <nav class="house" aria-label="Послуги за кімнатами дому" data-rec="R-UX-05">
+    <div class="container">
+      {floors.map((floor, f) => (
+        <ul class:list={["floor", `floor--${f + 1}`]}>
+          {floor.map((r, i) => (
+            <li class="floor__cell" style={`--span:${r.span};--i:${f * 4 + i}`}>
+              <a class="room" href={`#posluhy-${r.id}`} data-tab-link={r.id}>
+                <span class="room__name">{r.room}<Icon name="arrow" size={18} class="room__arrow" /></span>
+                <span class="room__master">{r.master}</span>
+                <span class="room__jobs">{r.short.join(", ")}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </nav>
+
+  <div class="foundation">
+    <div class="container">
+      <a class="foundation__link" href={`#posluhy-${renovation.id}`} data-tab-link={renovation.id}>
+        <span class="foundation__name">{renovation.room}</span>
+        <span class="foundation__text">{renovation.master}: частковий, косметичний, капітальний, під&nbsp;ключ</span>
+        <Icon name="arrow" size={20} class="foundation__arrow" />
+      </a>
+    </div>
+  </div>
+</section>

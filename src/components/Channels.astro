@@ -1,0 +1,19 @@
+---
+// The three real channels (ux/demo-home.md §1): main phone, Viber, Telegram. One component, four placements.
+import Icon from "./Icon.astro";
+import { mainPhone, viber, telegram } from "../data/site";
+interface Props { variant: "hero" | "stack" | "bar" | "blue" | "row"; class?: string; rec?: string; }
+const { variant, class: cls, rec } = Astro.props;
+const callLabel = variant === "bar" ? "Зателефонувати" : variant === "stack" || variant === "row" ? mainPhone.label : "";
+const callClass = variant === "stack" || variant === "row" ? "btn btn--quiet" : "btn btn--primary";
+const msgClass = variant === "blue" ? "btn btn--light" : "btn btn--quiet";
+---
+<div class:list={["channels", `channels--${variant}`, cls]} data-rec={rec}>
+  {variant !== "blue" && (
+    <a class:list={[callClass, "channels__call"]} href={`tel:${mainPhone.tel}`}>
+      <Icon name="phone" />{callLabel ? <span>{callLabel}</span> : <span><span class="channels__verb">Зателефонувати </span>{mainPhone.label}</span>}
+    </a>
+  )}
+  <a class:list={[msgClass, "channels__msg"]} href={viber.href}><Icon name="viber" /><span>Viber</span></a>
+  <a class:list={[msgClass, "channels__msg"]} href={telegram.href} target="_blank" rel="noopener"><Icon name="telegram" /><span>Telegram</span></a>
+</div>

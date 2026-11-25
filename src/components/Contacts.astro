@@ -1,0 +1,53 @@
+---
+// #kontakty: the front door. One main number large, messengers, the rest of the numbers behind a disclosure (C-020).
+import Channels from "./Channels.astro";
+import Icon from "./Icon.astro";
+import { mainPhone, viber, callCentre, control, email, address, mapHref, schedule, socials } from "../data/site";
+const dayIdx: Record<string, string> = { "Пн–Пт": "1 2 3 4 5", "Сб": "6", "Нд": "0" };
+---
+<section id="kontakty" class="band contacts on-blue">
+  <div class="container contacts__grid" data-reveal>
+    <div class="contacts__main">
+      <svg class="contacts__roof" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 60 L380 3 L1000 60" vector-effect="non-scaling-stroke" /></svg>
+      <h2>Напишіть або зателефонуйте</h2>
+      <a class="contacts__phone" href={`tel:${mainPhone.tel}`}>{mainPhone.label}</a>
+      <Channels variant="blue" />
+      <p class="contacts__viber">Номер Viber: <span class="contacts__copy">{viber.number.label}</span></p>
+      <details class="contacts__more">
+        <summary><span>Інші номери кол-центру</span><Icon name="chevron" size={18} /></summary>
+        <div class="contacts__lists">
+          <div>
+            <p class="contacts__label">Кол-центр</p>
+            <ul>{callCentre.map((p) => <li><a href={`tel:${p.tel}`}>{p.label}</a></li>)}</ul>
+          </div>
+          <div>
+            <p class="contacts__label">Відділ контролю якості</p>
+            <ul>{control.map((p) => <li><a href={`tel:${p.tel}`}>{p.label}</a></li>)}</ul>
+          </div>
+        </div>
+      </details>
+    </div>
+    <dl class="contacts__facts">
+      <div>
+        <dt>Офіс</dt>
+        <dd><a href={mapHref} target="_blank" rel="noopener">{address}</a></dd>
+      </div>
+      <div>
+        <dt>Графік</dt>
+        <dd>
+          <ul class="hours">
+            {schedule.map((s) => <li data-day={dayIdx[s.days]}><span>{s.days}</span><span>{s.hours}</span></li>)}
+          </ul>
+        </dd>
+      </div>
+      <div>
+        <dt>E-mail</dt>
+        <dd><a href={`mailto:${email}`}>{email}</a></dd>
+      </div>
+      <div>
+        <dt>Соцмережі</dt>
+        <dd><ul class="socials">{socials.map((s) => <li><a href={s.href} target="_blank" rel="noopener">{s.name}</a></li>)}</ul></dd>
+      </div>
+    </dl>
+  </div>
+</section>

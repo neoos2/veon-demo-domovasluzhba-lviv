@@ -1,0 +1,26 @@
+---
+// #harantiia: the written guarantee with one real term (C-008, C-009) and the quality-control numbers (C-020).
+import { control } from "../data/site";
+---
+<section id="harantiia" class="band guarantee on-blue" data-rec="R-UX-09">
+  <div class="container guarantee__grid" data-reveal>
+    <div class="guarantee__figure">
+      <p class="figure" aria-describedby="guarantee-caption">3&nbsp;місяці</p>
+      <p class="guarantee__caption" id="guarantee-caption"><strong>Приклад: так довго діє гарантія на заміну змішувача.</strong> Письмова гарантія є на всі послуги, а&nbsp;її термін для вашої роботи вказано в&nbsp;Акті.</p>
+    </div>
+    <div class="guarantee__body">
+      <h2>Гарантія письмово, в&nbsp;Акті</h2>
+      <ul class="guarantee__list">
+        <li>Письмова гарантія на всі послуги: майстер виписує Акт виконаних робіт.</li>
+        <li>Безкоштовне усунення проблеми, пов’язаної з неякісною роботою майстра, протягом терміну з&nbsp;Акта.</li>
+        <li>У гарантійному випадку Домова служба відшкодовує збитки та усуває проблему.</li>
+      </ul>
+      <div class="guarantee__control">
+        <p>Відділ контролю якості</p>
+        <p class="guarantee__phones">
+          {control.map((c, i) => <>{i > 0 && <span class="sep">, </span>}<a href={`tel:${c.tel}`}>{c.label}</a></>)}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

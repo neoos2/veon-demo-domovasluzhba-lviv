@@ -1,0 +1,49 @@
+---
+// #posluhy: the rooms as a plan of the house (tabs). Without script every room shows in order.
+import FutureLink from "./FutureLink.astro";
+import Channels from "./Channels.astro";
+import { rooms, renovation, soon } from "../data/site";
+const all = [...rooms, renovation];
+---
+<section id="posluhy" class="section services" data-rec="R-UX-05,R-UX-03">
+  <div class="container" data-reveal>
+    <div class="services__head">
+      <h2>Послуги за кімнатами дому</h2>
+      <p class="lead">Оберіть кімнату: поруч стоїть майстер і роботи, які у&nbsp;Львові замовляють найчастіше.</p>
+    </div>
+
+    <div class="plan">
+      <div class="plan__tabs" role="tablist" aria-label="Кімнати дому" aria-orientation="vertical">
+        <span class="plan__marker" aria-hidden="true"><svg viewBox="0 0 100 12" preserveAspectRatio="none" focusable="false"><path d="M0 12 L50 1.5 L100 12" vector-effect="non-scaling-stroke" /></svg></span>
+        {all.map((r, i) => (
+          <button type="button" role="tab" class="plan__tab" id={`tab-${r.id}`} aria-controls={`posluhy-${r.id}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1} data-room={r.id}>
+            <span class="plan__room">{r.room}</span>
+            <span class="plan__master">{r.master}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="plan__side">
+        <div class="plan__panels">
+          {all.map((r) => (
+            <div class="plan__panel" role="tabpanel" id={`posluhy-${r.id}`} aria-labelledby={`tab-${r.id}`} data-room={r.id} tabindex="0">
+              <h3 class="plan__title">{r.room}<span class="plan__who">{r.master}</span></h3>
+              <p class="plan__text">{r.text}</p>
+              {r.jobs.length > 0 && (
+                <ul class="jobs" aria-label={`Популярні роботи: ${r.master}`}>
+                  {r.jobs.map((j) => <li><FutureLink note={soon} class="jobs__item">{j}</FutureLink></li>)}
+                </ul>
+              )}
+              {r.jobs.length === 0 && <p class="plan__empty">Окремих популярних робіт цієї групи на сторінці Львова немає. Опишіть задачу менеджеру, він підбере майстра.</p>}
+            </div>
+          ))}
+        </div>
+        <div class="plan__cta">
+          <p><strong>Опишіть задачу у Viber, Telegram або телефоном.</strong> Надішліть фото, менеджер підбере майстра.</p>
+          <Channels variant="row" />
+          <FutureLink note={soon} class="services__catalog">Весь каталог: понад 800 послуг у Львові</FutureLink>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import Process from "../components/Process.astro";
+import Guarantee from "../components/Guarantee.astro";
+import Reviews from "../components/Reviews.astro";
+import About from "../components/About.astro";
+import AppBlock from "../components/AppBlock.astro";
+import Contacts from "../components/Contacts.astro";
+import Footer from "../components/Footer.astro";
+import MobileBar from "../components/MobileBar.astro";
+import displayFont from "../assets/fonts/lunasima-cyrillic-700-normal.woff2?url";
+import { mainPhone, email, schedule, socials } from "../data/site";
+
+// SE-R004: title ≤ 60, description ≤ 160, one H1.
+const title = "Виклик майстра у Львові з гарантією | Домова служба";
+const description = "Сантехнік, електрик, столяр, клінінг, ремонт техніки, вантажники у Львові. Майстер через годину або у зручний час, гарантія в Акті, оплата після приймання.";
+
+// SE-R002: Lviv LocalBusiness with the Lviv address and phone (C-019, C-020), no AggregateRating (C-018).
+const dayMap: Record<string, string[]> = {
+  "Пн–Пт": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "Сб": ["Saturday"], "Нд": ["Sunday"],
+};
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: "Домова служба — Львів",
+  telephone: mainPhone.tel,
+  email,
+  address: { "@type": "PostalAddress", streetAddress: "вул. Б. Хмельницького 176, офіс 106", addressLocality: "Львів", addressCountry: "UA" },
+  areaServed: { "@type": "City", name: "Львів" },
+  openingHoursSpecification: schedule.map((s) => {
+    const [opens, closes] = s.hours.split("–");
+    return { "@type": "OpeningHoursSpecification", dayOfWeek: dayMap[s.days], opens, closes };
+  }),
+  sameAs: socials.map((s) => s.href),
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#F5F5FA" />
+    <script type="application/ld+json" data-rec="SE-R002" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+  <Header slot="header" />
+  <Hero />
+  <Services />
+  <Process />
+  <Guarantee />
+  <Reviews />
+  <About />
+  <AppBlock />
+  <Contacts />
+  <Footer slot="footer" />
+  <MobileBar slot="after" />
+</Base>
+<script src="../scripts/ui.ts"></script>

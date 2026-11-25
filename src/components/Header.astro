@@ -1,0 +1,54 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import Channels from "./Channels.astro";
+import { nav, mainPhone, schedule, otherCities, soon } from "../data/site";
+---
+<header class="site-header" data-rec="R-UX-06">
+  <div class="container site-header__row">
+    <a class="site-header__logo" href="#top" aria-label="Домова служба, на початок сторінки"><Logo /></a>
+
+    <details class="pop pop--city" data-pop>
+      <summary class="pop__toggle city__toggle"><span>Львів</span><Icon name="chevron" size={16} /></summary>
+      <div class="pop__panel city__panel">
+        <p class="pop__note">Ви на сторінці Львова. Інші міста мережі:</p>
+        <ul class="city__list">
+          {otherCities.map((c) => <li><FutureLink note={soon}>{c}</FutureLink></li>)}
+        </ul>
+      </div>
+    </details>
+
+    <nav class="site-nav" aria-label="Розділи сторінки">
+      <ul>
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <p class="site-header__hours"><span data-today-label>{schedule[0].days}</span> <span data-today-hours>{schedule[0].hours}</span></p>
+    <a class="site-header__phone" href={`tel:${mainPhone.tel}`}>{mainPhone.label}</a>
+
+    <details class="pop pop--call" data-pop>
+      <summary class="btn btn--quiet pop__toggle">Викликати майстра</summary>
+      <div class="pop__panel call__panel">
+        <p class="pop__note">Менеджер прийме заявку і підбере майстра.</p>
+        <Channels variant="stack" />
+      </div>
+    </details>
+
+    <a class="site-header__tel" href={`tel:${mainPhone.tel}`} aria-label={`Зателефонувати ${mainPhone.label}`}><Icon name="phone" size={22} /></a>
+
+    <details class="pop pop--menu" data-pop>
+      <summary class="pop__toggle menu__toggle" aria-label="Меню"><Icon name="menu" size={24} class="menu__open" /><Icon name="close" size={24} class="menu__close" /></summary>
+      <div class="pop__panel menu__panel">
+        <ul class="menu__list">
+          {nav.map((n) => <li><a href={n.href} data-close>{n.label}</a></li>)}
+        </ul>
+        <p class="menu__group">Скоро на сайті</p>
+        <ul class="menu__soon">
+          {["Каталог послуг", "Про нас", "Акції", "Для бізнесу"].map((s) => <li><FutureLink note={soon}>{s}</FutureLink></li>)}
+        </ul>
+      </div>
+    </details>
+  </div>
+</header>

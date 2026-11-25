@@ -1,0 +1,20 @@
+---
+// #zastosunok: cashback 10% (C-011) and the one real app link of the Lviv page (C-035).
+import Icon from "./Icon.astro";
+import { appFeatures, appHref } from "../data/site";
+---
+<section id="zastosunok" class="section app">
+  <div class="container app__grid" data-reveal>
+    <div class="app__head">
+      <h2>Кешбек 10% на наступні замовлення</h2>
+      <p class="lead">10% від вартості послуг повертаються на рахунок у застосунку і&nbsp;йдуть на оплату наступних послуг.</p>
+      <div class="app__action">
+        <a class="btn btn--quiet" href={appHref} target="_blank" rel="noopener">Завантажити застосунок<Icon name="arrow" size={18} /></a>
+        <p class="small">App Store і Google Play</p>
+      </div>
+    </div>
+    <ul class="app__list" aria-label="Що можна в застосунку">
+      {appFeatures.map((f) => <li>{f}</li>)}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+---
+import Logo from "./Logo.astro";
+import FutureLink from "./FutureLink.astro";
+import { otherCities, soon } from "../data/site";
+const pages = ["Каталог послуг", "Про нас", "Акції", "Відгуки", "Вакансії", "Блог", "Для бізнесу"];
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="site-footer__logo" href="#top" aria-label="Домова служба, на початок сторінки"><Logo /></a>
+      <p>Майстри з письмовою гарантією з 2002 року.</p>
+    </div>
+    <nav class="site-footer__col" aria-label="Розділи сайту">
+      <p class="site-footer__title">Розділи</p>
+      <ul>{pages.map((p) => <li><FutureLink note={soon}>{p}</FutureLink></li>)}</ul>
+    </nav>
+    <div class="site-footer__col">
+      <p class="site-footer__title">Міста</p>
+      <ul>
+        <li><span aria-current="page">Львів</span></li>
+        {otherCities.map((c) => <li><FutureLink note={soon}>{c}</FutureLink></li>)}
+      </ul>
+    </div>
+    <div class="site-footer__col">
+      <p class="site-footer__title">Мова</p>
+      <ul class="site-footer__langs">
+        <li><span aria-current="page" lang="uk">UA</span></li>
+        <li><FutureLink note={soon}>RU</FutureLink></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <p>© 2026 «Домова служба». Усі права захищені.</p>
+    <ul>
+      <li><FutureLink note={soon}>Публічна оферта</FutureLink></li>
+      <li><FutureLink note={soon}>Політика конфіденційності</FutureLink></li>
+    </ul>
+  </div>
+</footer>

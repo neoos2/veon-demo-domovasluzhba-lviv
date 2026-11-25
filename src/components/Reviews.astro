@@ -1,0 +1,55 @@
+---
+// #vidhuky: the three reviews of the Lviv page, verbatim, with the master's name in bold (C-017). No stars (C-018).
+import FutureLink from "./FutureLink.astro";
+import { reviews, soon } from "../data/site";
+const parts = (text: string, master: string) => {
+  const i = text.indexOf(master);
+  return i < 0 ? [text, "", ""] : [text.slice(0, i), master, text.slice(i + master.length)];
+};
+const [lead, ...others] = reviews;
+const rest = others.filter((r) => r.text.length > 320);
+const underLead = others.filter((r) => r.text.length <= 320);
+---
+<section id="vidhuky" class="section reviews">
+  <div class="container" data-reveal>
+    <h2 class="reviews__title">Пан Олег, Василь і&nbsp;пан Юрій</h2>
+    <div class="reviews__grid">
+      <div class="reviews__main">
+      <figure class="review review--lead">
+        {(() => { const [a, b, c] = parts(lead.text, lead.master); return <blockquote><p>{a}<strong>{b}</strong>{c}</p></blockquote>; })()}
+        <figcaption>{lead.author}, Львів, <time datetime={lead.iso}>{lead.date}</time></figcaption>
+      </figure>
+      {underLead.map((r) => {
+        const [x, y, z] = parts(r.text, r.master);
+        return (
+          <figure class="review review--under">
+            <blockquote><p>{x}<strong>{y}</strong>{z}</p></blockquote>
+            <figcaption>{r.author}, Львів, <time datetime={r.iso}>{r.date}</time></figcaption>
+          </figure>
+        );
+      })}
+      </div>
+      <div class="reviews__side">
+        {rest.map((r) => {
+          const [a, b, c] = parts(r.text, r.master);
+          const long = r.text.length > 320;
+          const id = `review-${r.iso}`;
+          return (
+            <figure class="review">
+              <blockquote class:list={["review__text", { "review__text--long": long }]} id={id}>
+                {long ? (() => { const cut = c.indexOf("!", 220) + 1 || c.length; return <p>{a}<strong>{b}</strong>{c.slice(0, cut)}<span class="review__dots" aria-hidden="true">…</span><span class="review__rest">{c.slice(cut)}</span></p>; })() : <p>{a}<strong>{b}</strong>{c}</p>}
+              </blockquote>
+              {long && <button type="button" class="review__more" aria-expanded="false" aria-controls={id} data-more>Читати повністю</button>}
+              <figcaption>{r.author}, Львів, <time datetime={r.iso}>{r.date}</time></figcaption>
+            </figure>
+          );
+        })}
+      </div>
+    </div>
+    <div class="reviews__more">
+      <p class="small">Три останні відгуки зі сторінки Львова, тексти без змін.</p>
+      <FutureLink note={soon}>Усі відгуки</FutureLink>
+      <FutureLink note={soon}>Залишити відгук</FutureLink>
+    </div>
+  </div>
+</section>

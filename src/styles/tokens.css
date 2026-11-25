@@ -1,0 +1,94 @@
+/* Hallmark · shape: house-section index · genre: modern-minimal · theme: custom · job: hire · idea: "Дім у розрізі: у кожної кімнати свій майстер" · vibe: "по-господарськи ясно, надійно, тепло, впізнавано"
+ * paper: #F5F5FA · accent: #B8462A · display: Lunasima · body: Nunito Sans · hero: будинок у розрізі під лінією даху, H1 на горищі, 8 кімнат-груп на ультрамарині · nav: закріплена шапка з 5 якорями і номером · footer: чорнильний, компактний · imagery: none на першому екрані · signature: лінія даху зі знака
+ * axes: light/grotesk-sans/chromatic-ultramarine · posture: committed · surface: absolute · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: imagery (no client photos of quality), the house drawn in type, lines and colour fields instead of pictures */
+/* Hallmark · waive 7b · --color-on-primary #FFFFFF · approved concept palette (design/concept.md, veon-concept colors): white text on ultramarine 11.3:1 and on terracotta 5.3:1; concept outranks Hallmark (hallmark.md, priority 2) */
+/* Hallmark · F4 · answered: one terracotta primary per screen; .btn--light lives only on the ultramarine contacts band, where terracotta is forbidden (2.1:1), so it is that band's primary, not a second one beside it */
+/* Hallmark · waive 39b · a.btn 56px at 1440 · concept «Дизайн-система для FULL»: primary 56 px (390: 52) for the one call action; concept outranks Hallmark */
+/* Hallmark · waive 59 · 96px between paper sections · concept rhythm 96 desktop / 64 phone between blocks, 144 inside blue bands (density change is the design) */
+/* Hallmark · waive 77 · #pro-nas about statement · network figures (orders, clients, masters) stay at the title step so they never outrank the service heads (ux/demo-home.md 10.7); no counter strip by concept */
+/* Hallmark · waive 49b · office address link wraps at 320 · a real address of the client (company.contacts.addresses), not a control label; it cannot be shortened */
+/* Hallmark · 42 · answered: footer is the compact ink index from concept §5 (pages to come as FutureLink, cities, language, legal line) */
+/* Hallmark · F20 · answered: a room keeps its true count of popular jobs (C-023), no padding items */
+/* Line 1 of this file is the Hallmark stamp (docs/process/hallmark.md); values from design/concept.md (veon-concept, «Дизайн-система для FULL»). */
+
+@font-face { font-family: "Lunasima"; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/lunasima-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Lunasima"; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/lunasima-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Nunito Sans"; font-style: normal; font-weight: 200 1000; font-display: swap; src: url("../assets/fonts/nunito-sans-cyrillic-wght-normal.woff2") format("woff2-variations"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Nunito Sans"; font-style: normal; font-weight: 200 1000; font-display: swap; src: url("../assets/fonts/nunito-sans-latin-wght-normal.woff2") format("woff2-variations"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root {
+  /* colour roles (concept.md, «Дизайн-система для FULL») */
+  --color-bg: #F5F5FA;
+  --color-well: #E8E9F4;
+  --color-text: #12133D;
+  --color-muted: #4A4C70;
+  --color-rule: #C8C9DE;
+  --color-primary: #1E22AA;
+  --color-primary-deep: #15177A;
+  --color-walls: #4B4FC2;
+  --color-on-primary: #FFFFFF;
+  --color-on-primary-muted: #C9CBF2;
+  --color-accent: #B8462A;
+  --color-accent-hover: #9E3A20;
+  --color-accent-on-primary: #F2A488;
+  --color-footer: #12133D;
+  --color-focus: #1E22AA;
+  --color-accent-ink: #FFFFFF;
+
+  /* type */
+  --font-display: "Lunasima", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+  --text-display: clamp(2.5rem, 1.2rem + 4.6vw, 4.75rem);   /* 40 → 76 */
+  --text-figure: clamp(5.5rem, 3rem + 8vw, 10rem);          /* 88 → 160 */
+  --text-section: clamp(1.875rem, 1.3rem + 1.9vw, 2.75rem);  /* 30 → 44 */
+  --text-title: clamp(1.375rem, 1.1rem + 0.8vw, 1.75rem);    /* 22 → 28 */
+  --text-room: clamp(1.125rem, 0.95rem + 0.55vw, 1.5rem);    /* 18 → 24 */
+  --text-lead: clamp(1.0625rem, 0.95rem + 0.4vw, 1.25rem);   /* 17 → 20 */
+  --text-md: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem);       /* 16 → 17 */
+  --text-sm: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);    /* 14 → 15 */
+  --lh-display: 1.04;
+  --lh-head: 1.12;
+  --lh-text: 1.55;
+  --track-display: -0.02em;
+
+  /* space (4/8 scale) */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 144px;
+  --section-gap: var(--space-3xl);
+  --band-gap: var(--space-4xl);
+  --space: 20px;            /* side gutter; 32 from 48rem, 64 from 80rem */
+  --gap-columns: 24px;
+  --container: 1312px;
+
+  /* shape and motion */
+  --radius: 4px;
+  --line: 1px;
+  --roof: 3px;
+  --header-h: 60px;
+  --bar-h: 68px;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-in: cubic-bezier(.5, 0, .75, 0);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 500ms;
+  --dur: 500ms;
+}
+
+@media (min-width: 48rem) {
+  :root { --space: 32px; --header-h: 72px; }
+}
+@media (min-width: 80rem) {
+  :root { --space: 64px; }
+}
+@media (max-width: 47.99rem) {
+  :root { --section-gap: var(--space-2xl); --band-gap: var(--space-3xl); --gap-columns: 16px; }
+}

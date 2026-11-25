@@ -1,0 +1,20 @@
+---
+// #pro-nas: since 2002, five cities; network figures in one sentence, signed «по мережі» (C-003, C-001, C-004, C-002).
+import FutureLink from "./FutureLink.astro";
+import { otherCities, soon } from "../data/site";
+---
+<section id="pro-nas" class="section about" data-rec="R-UX-09">
+  <div class="container about__grid" data-reveal>
+    <div class="about__head">
+      <h2>Одна служба в&nbsp;п’яти містах</h2>
+      <ul class="cities" aria-label="Міста мережі">
+        <li><span class="cities__here" aria-current="page">Львів</span></li>
+        {otherCities.map((c) => <li><FutureLink note={soon}>{c}</FutureLink></li>)}
+      </ul>
+    </div>
+    <div class="about__body">
+      <p class="about__statement">Понад <span class="num">1&nbsp;000&nbsp;000</span> успішно виконаних замовлень, понад <span class="num">100&nbsp;тисяч</span> вдячних клієнтів і&nbsp;<span class="num">ТОП-300</span> кращих майстрів.</p>
+      <p class="about__caption">По мережі, за даними компанії.</p>
+    </div>
+  </div>
+</section>
